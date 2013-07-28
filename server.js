@@ -69,6 +69,9 @@ twit.stream('statuses/filter', {
 	io.sockets.on('connection', function(socket) {
 		stream.on('data', function(data) {
 			var now = (new Date()).getTime();
+			if(!data || !data.user){
+				return;
+			}
 
 			var msg = {
 				text: data.text,
