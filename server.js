@@ -82,12 +82,7 @@ twit.stream('statuses/filter', {
 
 			console.log(msg);
 			
-			socket.emit('tweet', {
-				text: data.text,
-				author: '@' + data.user.screen_name,
-				added: now,
-				timestamp: moment(now).format('MM/DD/YYYY, h:mm:ss a')
-			});
+			socket.emit('tweet', msg);
 		});
 	});
 });
