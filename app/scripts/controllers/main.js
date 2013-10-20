@@ -6,9 +6,11 @@ angular.module('BieberTweetsAngularApp')
 
 		socket.on('tweet', function(data) {
 			$scope.tweets.unshift(data);
+
+			$scope.tweets = $scope.tweets.slice(0,20);
 		});
 
-		$window.setInterval( function(){
-			$scope.tweets = $scope.tweets.slice(1,20);
-		}, 5000);
+		// $window.setInterval( function(){
+		// 	$scope.tweets = $scope.tweets.slice(1,20);
+		// }, 5000);
 	});
