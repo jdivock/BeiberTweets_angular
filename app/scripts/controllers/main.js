@@ -10,5 +10,5 @@ angular.module('BieberTweetsAngularApp')
 
 		$window.setInterval( function(){
 			$scope.tweets = $scope.tweets.slice(1,20);
-		}, 5000)
+		}, 5000);
 	});

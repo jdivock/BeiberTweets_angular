@@ -62,30 +62,41 @@ var twit = new twitter({
 	access_token_secret: process.env.TBT_ACCESS_TOKEN_SECRET
 });
 
-twit.stream('statuses/filter', {
-	track: 'bieber'
-}, function(stream) {
+function setupStream() {
+	twit.stream('statuses/filter', {
+		track: 'bieber'
+	}, function(stream) {
 
-	io.sockets.on('connection', function(socket) {
-		stream.on('data', function(data) {
-			var now = (new Date()).getTime();
-			if(!data || !data.user){
-				return;
-			}
+		io.sockets.on('connection', function(socket) {
 
-			var msg = {
-				text: data.text,
-				author: '@' + data.user.screen_name,
-				added: now,
-				timestamp: moment(now).format('MM/DD/YYYY, h:mm:ss a')
-			};
+			stream.on('data', function(data) {
+				var now = (new Date()).getTime();
+				if (!data || !data.user) {
+					return;
+				}
 
-			console.log(msg);
-			
-			socket.emit('tweet', msg);
+				var msg = {
+					text: data.text,
+					author: '@' + data.user.screen_name,
+					added: now,
+					timestamp: moment(now).format('MM/DD/YYYY, h:mm:ss a')
+				};
+
+				console.log(msg);
+
+				socket.emit('tweet', msg);
+			});
+
+			stream.on('disconnect', setupStream);
+			stream.on('end', setupStream);
+
+
 		});
 	});
-});
+
+};
+
+setupStream();
 
 /**
  * Start Server
