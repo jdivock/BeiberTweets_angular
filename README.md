@@ -4,8 +4,8 @@ BeiberTweets_angular
 Had too much trouble writing this thing in meteor, just redoing it in node/angular
 
 TODO: 
-- [] Set up a way to refresh twitter connection. 
-- [] Only stream from twitter when socketio connection > 0
+- [ ] Set up a way to refresh twitter connection. 
+- [ ] Only stream from twitter when socketio connection > 0
 
 
 Note to self: 
