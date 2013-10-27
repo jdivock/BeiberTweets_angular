@@ -20,7 +20,7 @@ var io = require('socket.io').listen(server);
 app.set('port', process.env.PORT || 3000);
 // app.set('views', __dirname + '/views');
 // app.set('view engine', 'jade');
-app.use(express.logger('dev'));
+
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 // app.use(express.static(path.join(__dirname, 'app')));
@@ -28,6 +28,7 @@ app.use(app.router);
 
 // development only
 if (app.get('env') === 'development') {
+	app.use(express.logger('dev'));
 	app.use(express.errorHandler());
 	app.use(express.static(__dirname + "/app"));
 	app.use(express.static(__dirname + "/app/bower_components/font-awesome"));
