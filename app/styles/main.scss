@@ -72,10 +72,10 @@ section {
 		top: 50%;
 		left: -40em;
 		// transition: 10s linear all;
-		-webkit-animation: tweet-across 10s linear;
-		-webkit-animation-play-state: running;
+		animation: tweet-across 10s linear;
+		animation-play-state: running;
 		&:hover{
-			-webkit-animation-play-state: paused;
+			animation-play-state: paused;
 			a {
 				text-decoration: underline;
 				color: #666;

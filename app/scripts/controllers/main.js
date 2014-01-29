@@ -31,7 +31,7 @@ angular.module('BieberTweetsAngularApp')
 
                 $scope.specialTweets.push(data);
 
-                $scope.specialTweets = $scope.specialTweets.slice(0, 40);
+                // $scope.specialTweets = $scope.specialTweets.slice(0, 40);
             }
 
             $scope.tweets = $scope.tweets.slice(0, 40);
