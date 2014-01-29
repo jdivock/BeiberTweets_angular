@@ -2,10 +2,10 @@
  * Module dependencies
  */
 var express = require('express'),
-	http = require('http'),
-	twitter = require("twitter"),
-	moment = require('moment'),
-	path = require('path');
+    http = require('http'),
+    twitter = require("twitter"),
+    moment = require('moment'),
+    path = require('path');
 
 var app = module.exports = express();
 var server = require('http').createServer(app);
@@ -28,17 +28,17 @@ app.use(app.router);
 
 // development only
 if (app.get('env') === 'development') {
-	app.use(express.logger('dev'));
-	app.use(express.errorHandler());
-	app.use(express.static(__dirname + "/app"));
-	app.use(express.static(__dirname + "/app/bower_components/font-awesome"));
-	app.use(express.static(__dirname + "/.tmp"));
+    app.use(express.logger('dev'));
+    app.use(express.errorHandler());
+    app.use(express.static(__dirname + "/app"));
+    app.use(express.static(__dirname + "/app/bower_components/font-awesome"));
+    app.use(express.static(__dirname + "/.tmp"));
 }
 
 // production only
 if (app.get('env') === 'production') {
-	// TODO
-	app.use(express.static(__dirname + "/dist"));
+    // TODO
+    app.use(express.static(__dirname + "/dist"));
 };
 
 
@@ -57,43 +57,49 @@ if (app.get('env') === 'production') {
 // app.get('*', routes.index);
 
 var twit = new twitter({
-	consumer_key: process.env.TBT_CONSUMER_KEY,
-	consumer_secret: process.env.TBT_CONSUMER_SECRET_KEY,
-	access_token_key: process.env.TBT_ACCESS_TOKEN,
-	access_token_secret: process.env.TBT_ACCESS_TOKEN_SECRET
+    consumer_key: process.env.TBT_CONSUMER_KEY,
+    consumer_secret: process.env.TBT_CONSUMER_SECRET_KEY,
+    access_token_key: process.env.TBT_ACCESS_TOKEN,
+    access_token_secret: process.env.TBT_ACCESS_TOKEN_SECRET
 });
 
 function setupStream() {
-	twit.stream('statuses/filter', {
-		track: 'bieber'
-	}, function(stream) {
+    twit.stream('statuses/filter', {
+        track: 'bieber'
+    }, function(stream) {
 
-		io.sockets.on('connection', function(socket) {
+        io.sockets.on('connection', function(socket) {
 
-			stream.on('data', function(data) {
-				var now = (new Date()).getTime();
-				if (!data || !data.user) {
-					return;
-				}
+            stream.on('data', function(data) {
+                var now = (new Date()).getTime();
+                if (!data || !data.user) {
+                    return;
+                }
 
-				var msg = {
-					text: data.text,
-					author: '@' + data.user.screen_name,
-					added: now,
-					timestamp: moment(now).format('MM/DD/YYYY, h:mm:ss a')
-				};
+                
 
-				console.log(msg);
+                var msg = {
+                    text: data.text,
+                    // htmlText: data.htmlText,
+                    user_name: data.user.screen_name,
+                    id: data.id_str,
+                    author: '@' + data.user.screen_name,
+                    added: now,
+                    entities: data.entities,
+                    timestamp: moment(now).format('MM/DD/YYYY, h:mm:ss a')
+                };
 
-				socket.emit('tweet', msg);
-			});
+                // console.log(data);
 
-			stream.on('disconnect', setupStream);
-			stream.on('end', setupStream);
+                socket.emit('tweet', msg);
+            });
+
+            stream.on('disconnect', setupStream);
+            stream.on('end', setupStream);
 
 
-		});
-	});
+        });
+    });
 
 };
 
@@ -104,5 +110,5 @@ setupStream();
  */
 
 server.listen(app.get('port'), function() {
-	console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });

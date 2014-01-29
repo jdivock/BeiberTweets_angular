@@ -28,11 +28,14 @@
     <!-- Add your site or application content here -->
     <div class="container" ng-view="main"></div>
 
-        <footer class="row">
-        <span class="span12">
+        <footer>
+        <span class='row'>
+        <span class='cell'>
         <a href="https://twitter.com/jdivock" class="twitter-follow-button" data-show-count="false">Follow @jdivock</a>
-
-        <a class="btn btn-small btn-git" href='https://github.com/jdivock/BieberTweets_angular'><i class='icon-github'></i> Github</a>
+        </span>
+<span class='cell'>
+        <a class="gh-btn" href='https://github.com/jdivock/BieberTweets_angular'><i class='icon-github'></i> Github</a>
+        </span>
         <span>
         
     </footer>
@@ -60,26 +63,15 @@
         <script src="/socket.io/socket.io.js"></script>
 
         <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-dropdown.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-tooltip.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-modal.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-transition.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-button.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-popover.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-typeahead.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-carousel.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-scrollspy.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-collapse.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-tab.js"></script>
+       
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
         
         <script src="bower_components/angular-socket-io/socket.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('BieberTweetsAngularApp', ['btford.socket-io'])
+angular.module('BieberTweetsAngularApp', ['ngRoute', 'ngAnimate','ngSanitize', 'btford.socket-io'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

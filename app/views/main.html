@@ -1,17 +1,22 @@
- 	<div class="row">
- 		<div class="span12 hero-unit">
- 			<h1>Bieber Tweets</h1>
- 			<p>Destroying your faith in humanity one tweet at a time</p>
+<section>
+    <div class="title">
+        <h4>Yep</h4>
+        <p>Destroying your faith in humanity one tweet at a time</p>
 
- 			<p>No really, this many people are tweeting about him right now . . . in real time</p>
- 		</div>
- 	</div>
+        <p>No really, this many people are tweeting about him right now . . . in real time</p>
+    </div>
 
- 	<div class="row tweets">
- 		<div class="span12" ng-repeat="tweet in tweets">
- 			<strong>{{tweet.author}}: </strong>{{tweet.text}}
- 			<div>{{tweet.timestamp}}</div>
- 		</div>
- 	</div>
+    <div class="tweets">
+        <div ng-repeat="tweet in tweets">
+            <strong>{{tweet.author}}:</strong>{{tweet.text}}
+            <div>{{tweet.timestamp}}</div>
+        </div>
+    </div>
 
+    <div class="naughty-tweets">
+        <div ng-repeat="tweet in specialTweets" class="special-tweet" ng-style="tweet.style">
+            <a href="https://twitter.com/{{tweet.user_name}}/status/{{tweet.id}}" target="_blank"><strong>{{tweet.author}}:</strong></a><span ng-bind-html="tweet.text | linky"></span>
+        </div>
+    </div>
 
+</section>
