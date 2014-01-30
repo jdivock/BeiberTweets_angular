@@ -356,6 +356,7 @@ module.exports = function(grunt) {
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
+        'autoprefixer',
         'concat',
         'copy',
         'cdnify',
