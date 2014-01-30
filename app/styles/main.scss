@@ -68,9 +68,10 @@ section {
 	.special-tweet {
 		position: absolute;
 		width: 25em;
-		overflow-x: hidden;
+		overflow: hidden;
 		top: 50%;
 		left: -40em;
+		z-index: 39;
 		// transition: 10s linear all;
 		animation: tweet-across 10s linear;
 		animation-play-state: running;
