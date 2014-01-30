@@ -6,7 +6,7 @@ angular.module('BieberTweetsAngularApp')
 
         $scope.specialTweets = [];
 
-        var naughtyReg = /fuck|shit|^\s*ass|wimp|wuss|loser|pussy|cunt|balls|butt|scrotum|vagina|boobs|tits|penis|cock/;
+        var naughtyReg = /fuck|shit|^\s*ass|wimp|wuss|loser|pussy|cunt|balls|butt|scrotum|vagina|boobs|tits|penis|cock|aids|xanax|drugs|alchohol|pot|smoking|crack|drugs/;
 
         socket.on('tweet', function(data) {
             $scope.tweets.unshift(data);
