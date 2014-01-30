@@ -1,12 +1,20 @@
 'use strict';
 
 angular.module('BieberTweetsAngularApp')
+    .factory('socket', function(socketFactory) {
+        return socketFactory({
+            // prefix: '/BieberTweets',
+            // ioSocket: io.connect('/BieberTweets/')
+        });
+    })
     .controller('MainCtrl', function($scope, socket, $window) {
+        console.log(arguments);
+
         $scope.tweets = [];
 
         $scope.specialTweets = [];
 
-        var naughtyReg = /fuck|shit|^\s*ass|wimp|wuss|loser|pussy|cunt|balls|butt|scrotum|vagina|boobs|tits|penis|cock|aids|xanax|drugs|alchohol|pot|smoking|crack|drugs/;
+        var naughtyReg = /xanax|drugs|alchohol|pot|smoking|crack|fuck|shit|^\s*ass|wimp|wuss|loser|pussy|cunt|balls|butt|scrotum|vagina|boobs|tits|penis|cock|aids/;
 
         socket.on('tweet', function(data) {
             $scope.tweets.unshift(data);

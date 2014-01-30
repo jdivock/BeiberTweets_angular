@@ -10,7 +10,7 @@
     "angular-resource": "~1.0.7",
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
-    "angular-socket-io": "~0.2.0",
+    "angular-socket-io": "~0.3.0",
     "font-awesome": "~3.2.1",
     "socket.io": "~0.9.15",
     "angular-animate": "~1.2.10",
@@ -21,6 +21,7 @@
     "angular-scenario": "~1.0.7"
   },
   "resolutions": {
-    "angular": "1.2.10"
+    "angular": "~1.2.10",
+    "angular-socket-io": "~0.3.0"
   }
 }
