@@ -5,7 +5,7 @@ angular.module('BieberTweetsAngularApp')
 
         return socketFactory({
             ioSocket: io.connect('/', {
-                resource: $window.location.pathname + '/socket.io'
+                resource: $window.location.pathname.substring(0, $window.location.pathname.length - 1) + 'socket.io'
             })
         });
     })
