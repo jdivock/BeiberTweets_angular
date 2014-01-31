@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('BieberTweetsAngularApp')
-    .factory('socket', function(socketFactory) {
+    .factory('socket', function(socketFactory, $location) {
+        // console.log($location.path());
+
         return socketFactory({
-            // prefix: '/BieberTweets',
-            // ioSocket: io.connect('/BieberTweets/')
+            ioSocket: io.connect('/', {
+                resource: $location.path() + '/socket.io'
+            })
         });
     })
     .controller('MainCtrl', function($scope, socket, $window) {
