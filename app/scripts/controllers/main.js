@@ -6,7 +6,11 @@ angular.module('BieberTweetsAngularApp')
         // TODO: Path name hack for socket.io . . . maybe figure something out better someday
         var path = $window.location.pathname;
 
-        path = $window.location.pathname.substring(0, $window.location.pathname.length - 1)
+        if (path.length === 1) {
+            path = "";
+        } else {
+            path = $window.location.pathname.substring(1, $window.location.pathname.length - 1);
+        }
 
         return socketFactory({
             ioSocket: io.connect('/', {
