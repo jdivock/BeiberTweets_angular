@@ -1,6 +1,6 @@
 /*
 * Scut, a collection of Sass utilities to ease and improve our implementations of common style-code patterns.
-* v0.8.0
+* v0.9.0
 * Docs at http://davidtheclark.github.io/scut
 */
 
@@ -24,15 +24,22 @@
 // SCUT LIST: UNSTYLED
 // http://davidtheclark.github.io/scut/#list_unstyled
 
-@mixin scut-list-unstyled {
+@mixin scut-list-unstyled(
+  $no-margin: true
+) {
 
   list-style-type: none;
   padding-left: 0;
 
+  @if $no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
 }
 
 %scut-list-unstyled {
-  @include scut-list-unstyled;
+  @include scut-list-unstyled();
 }
 
 // SCUT LIST: FLOATED
@@ -42,10 +49,11 @@
 
 @mixin scut-list-floated (
   $space: false,
-  $dir: left
+  $dir: left,
+  $no-margin: true
 ) {
 
-  @include scut-list-unstyled;
+  @include scut-list-unstyled($no-margin);
   @include scut-clearfix;
 
   & > li {
@@ -152,13 +160,15 @@ $scut-em-base: 16 !default;
 
 // Depends on `scut-strip-unit`.
 
+$scut-rem-base: 16 !default;
+
 @function scut-rem (
   $pixels
 ) {
 
   $rem-vals: ();
   @each $val in $pixels {
-    $val-in-rems: scut-strip-unit($val) / 16 * 1rem;
+    $val-in-rems: scut-strip-unit($val) / $scut-rem-base * 1rem;
     $rem-vals: append($rem-vals, $val-in-rems);
   }
 
@@ -434,7 +444,8 @@ $scut-em-base: 16 !default;
 
 @mixin scut-reset-button {
   // Reset default button styles, which are never used.
-  button {
+  button,
+  input[type="button"] {
     background: transparent;
     border: 0;
     color: inherit;
@@ -449,6 +460,10 @@ $scut-em-base: 16 !default;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    &::-moz-focus-inner {
+      padding:0;
+      border:0;
+    }
   }
 }
 
@@ -778,7 +793,8 @@ $scut-em-base: 16 !default;
 @mixin scut-list-custom (
   $content: "\2022",
   $marker-width: 0.75em,
-  $pad: 0
+  $pad: 0,
+  $no-margin: false
 ) {
 
   $content-val: null;
@@ -800,6 +816,11 @@ $scut-em-base: 16 !default;
 
   padding-left: $marker-width + $pad;
   list-style-type: none;
+
+  @if $no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
   & > li {
     position: relative;
@@ -828,10 +849,11 @@ $scut-em-base: 16 !default;
   $divider: "|",
   $space: 0.5em,
   $dir: left,
-  $height: false
+  $height: false,
+  $no-margin: true
 ) {
 
-  @include scut-list-floated($dir: $dir);
+  @include scut-list-floated($dir: $dir, $no-margin: $no-margin);
 
   $pseudo: if($dir == left, 'before', 'after');
 
@@ -883,10 +905,11 @@ $scut-em-base: 16 !default;
 // Depends on `list-unstyled`.
 
 @mixin scut-list-inline (
-  $space: false
+  $space: false,
+  $no-margin: true
 ) {
 
-  @include scut-list-unstyled;
+  @include scut-list-unstyled($no-margin);
 
   & > li {
     display: inline-block;
@@ -911,12 +934,11 @@ $scut-em-base: 16 !default;
 
 @mixin scut-list-punctuated (
   $divider: ", ",
-  $display: inline
+  $display: inline,
+  $no-margin: true
 ) {
 
-  @include scut-list-unstyled;
-  margin-top: 0;
-  margin-bottom: 0;
+  @include scut-list-unstyled($no-margin);
 
   & > li {
     display: $display;
@@ -1112,8 +1134,7 @@ $scut-em-base: 16 !default;
 // http://davidtheclark.github.io/scut/#ratio-box
 
 @mixin scut-ratio-box (
-  $ratio: 1/1,
-  $inner: ".scut-inner"
+  $ratio: 1/1
 ) {
 
   overflow: hidden;
@@ -1127,15 +1148,6 @@ $scut-em-base: 16 !default;
     display: block;
     height: 0;
     padding-top: (1 / $ratio) * 100%;
-  }
-
-  // The inner element simply fills up the container.
-  & > #{$inner} {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
   }
 
 }
@@ -1422,6 +1434,11 @@ $scut-whitecircle: "\25cb";
   $weight: normal,
   $style: normal
 ) {
+
+  @if index('italic' 'oblique', $weight) {
+    $style: $weight;
+    $weight: normal;
+  }
 
   @font-face {
     font-family: $font-family;
