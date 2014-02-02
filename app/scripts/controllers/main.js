@@ -3,9 +3,17 @@
 angular.module('BieberTweetsAngularApp')
     .factory('socket', function(socketFactory, $location, $window) {
 
+        var path = $window.location.pathname;
+
+        if(path.length <= 1){
+            path = "";
+        } else {
+            $window.location.pathname.substring(0, $window.location.pathname.length - 1)
+        }
+
         return socketFactory({
             ioSocket: io.connect('/', {
-                resource: $window.location.pathname.substring(0, $window.location.pathname.length - 1) + 'socket.io'
+                resource: path + 'socket.io'
             })
         });
     })
