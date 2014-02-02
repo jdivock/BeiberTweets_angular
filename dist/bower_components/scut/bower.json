@@ -1,6 +1,6 @@
 {
   "name": "Scut",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "homepage": "http://davidtheclark.github.io/scut/",
   "authors": [
     "David Clark <david.dave.clark@gmail.com>"
@@ -28,7 +28,6 @@
     "scut.gemspec"
   ],
   "devDependencies": {
-    "normalize-scss": "~2.1.2",
-    "overthrow": "~0.6.5"
+    "normalize-scss": "~2.1.2"
   }
 }
