@@ -3,13 +3,10 @@
 angular.module('BieberTweetsAngularApp')
     .factory('socket', function(socketFactory, $location, $window) {
 
+        // TODO: Path name hack for socket.io . . . maybe figure something out better someday
         var path = $window.location.pathname;
 
-        if(path.length <= 1){
-            path = "";
-        } else {
-            $window.location.pathname.substring(0, $window.location.pathname.length - 1)
-        }
+        path = $window.location.pathname.substring(0, $window.location.pathname.length - 1)
 
         return socketFactory({
             ioSocket: io.connect('/', {
@@ -35,14 +32,6 @@ angular.module('BieberTweetsAngularApp')
                 data.style = {
                     'top': Math.floor(Math.random() * (100 - 1)) + '%'
                 };
-
-                // if (data.entities && data.entities.media) {
-                //     data.text = data.text.substring(0, data.entities.media[0].indices[0]) +
-                //         '<a href="' + data.entities.media[0].url + '">' + data.text.substring(data.entities.media[0].indices[0], data.entities.media[0].indices[1]) +
-                //         '</a>' + data.text.substring(data.entities.media[0].indices[1], data.entities.media[0].length);
-
-                //     console.log("HTML TEXT", data.text);
-                // }
 
 
                 console.log('hit', data);
