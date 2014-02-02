@@ -9,7 +9,7 @@ angular.module('BieberTweetsAngularApp')
         if (path.length === 1) {
             path = "";
         } else {
-            path = $window.location.pathname.substring(1, $window.location.pathname.length - 1);
+            path = $window.location.pathname.substring(1, $window.location.pathname.length);
         }
 
         return socketFactory({
