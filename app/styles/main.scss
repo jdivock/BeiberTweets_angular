@@ -13,6 +13,7 @@ html, body, section {
 
 body {
     margin: 0;
+    font-family: "Helvetica Neue", "Helvetica", "sans-serif";
 }
 
 a {
@@ -37,6 +38,8 @@ section {
         color: #d7d7d7;
         position: absolute;
         top: 0;
+        left: 0;
+        margin: 0;
         height: 100%;
         overflow: hidden;
     }
